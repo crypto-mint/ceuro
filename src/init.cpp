@@ -4,7 +4,7 @@
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 #include "db.h"
 #include "walletdb.h"
-#include "freicoinrpc.h"
+#include "ceurorpc.h"
 #include "net.h"
 #include "init.h"
 #include "util.h"
@@ -42,7 +42,7 @@ void ExitTimeout(void* parg)
 void StartShutdown()
 {
 #ifdef QT_GUI
-    // ensure we leave the Qt main loop for a clean GUI exit (Shutdown() is called in freicoin.cpp afterwards)
+    // ensure we leave the Qt main loop for a clean GUI exit (Shutdown() is called in ceuro.cpp afterwards)
     uiInterface.QueueShutdown();
 #else
     // Without UI, Shutdown() can simply be started in a new thread
@@ -56,7 +56,7 @@ void Shutdown(void* parg)
     static bool fTaken;
 
     // Make this thread recognisable as the shutdown thread
-    RenameThread("freicoin-shutoff");
+    RenameThread("ceuro-shutoff");
 
     bool fFirstThread = false;
     {
@@ -80,10 +80,10 @@ void Shutdown(void* parg)
         delete pwalletMain;
         NewThread(ExitTimeout, NULL);
         Sleep(50);
-        printf("Freicoin exited\n\n");
+        printf("CEuro exited\n\n");
         fExit = true;
 #ifndef QT_GUI
-        // ensure non-UI client gets exited here, but let Freicoin-Qt reach 'return 0;' in freicoin.cpp
+        // ensure non-UI client gets exited here, but let CEuro-Qt reach 'return 0;' in ceuro.cpp
         exit(0);
 #endif
     }
@@ -123,7 +123,7 @@ bool AppInit(int argc, char* argv[])
         //
         // Parameters
         //
-        // If Qt is used, parameters/freicoin.conf are parsed in qt/freicoin.cpp's main()
+        // If Qt is used, parameters/ceuro.conf are parsed in qt/ceuro.cpp's main()
         ParseParameters(argc, argv);
         if (!boost::filesystem::is_directory(GetDataDir(false)))
         {
@@ -134,13 +134,13 @@ bool AppInit(int argc, char* argv[])
 
         if (mapArgs.count("-?") || mapArgs.count("--help"))
         {
-            // First part of help message is specific to freicoind / RPC client
-            std::string strUsage = _("Freicoin version") + " " + FormatFullVersion() + "\n\n" +
+            // First part of help message is specific to ceurod / RPC client
+            std::string strUsage = _("CEuro version") + " " + FormatFullVersion() + "\n\n" +
                 _("Usage:") + "\n" +
-                  "  freicoind [options]                     " + "\n" +
-                  "  freicoind [options] <command> [params]  " + _("Send command to -server or freicoind") + "\n" +
-                  "  freicoind [options] help                " + _("List commands") + "\n" +
-                  "  freicoind [options] help <command>      " + _("Get help for a command") + "\n";
+                  "  ceurod [options]                     " + "\n" +
+                  "  ceurod [options] <command> [params]  " + _("Send command to -server or ceurod") + "\n" +
+                  "  ceurod [options] help                " + _("List commands") + "\n" +
+                  "  ceurod [options] help <command>      " + _("Get help for a command") + "\n";
 
             strUsage += "\n" + HelpMessage();
 
@@ -150,7 +150,7 @@ bool AppInit(int argc, char* argv[])
 
         // Command-line RPC
         for (int i = 1; i < argc; i++)
-            if (!IsSwitchChar(argv[i][0]) && !boost::algorithm::istarts_with(argv[i], "freicoin:"))
+            if (!IsSwitchChar(argv[i][0]) && !boost::algorithm::istarts_with(argv[i], "ceuro:"))
                 fCommandLine = true;
 
         if (fCommandLine)
@@ -176,7 +176,7 @@ int main(int argc, char* argv[])
 {
     bool fRet = false;
 
-    // Connect freicoind signal handlers
+    // Connect ceurod signal handlers
     noui_connect();
 
     fRet = AppInit(argc, argv);
@@ -190,13 +190,13 @@ int main(int argc, char* argv[])
 
 bool static InitError(const std::string &str)
 {
-    uiInterface.ThreadSafeMessageBox(str, _("Freicoin"), CClientUIInterface::OK | CClientUIInterface::MODAL);
+    uiInterface.ThreadSafeMessageBox(str, _("CEuro"), CClientUIInterface::OK | CClientUIInterface::MODAL);
     return false;
 }
 
 bool static InitWarning(const std::string &str)
 {
-    uiInterface.ThreadSafeMessageBox(str, _("Freicoin"), CClientUIInterface::OK | CClientUIInterface::ICON_EXCLAMATION | CClientUIInterface::MODAL);
+    uiInterface.ThreadSafeMessageBox(str, _("CEuro"), CClientUIInterface::OK | CClientUIInterface::ICON_EXCLAMATION | CClientUIInterface::MODAL);
     return true;
 }
 
@@ -218,8 +218,8 @@ std::string HelpMessage()
 {
     string strUsage = _("Options:") + "\n" +
         "  -?                     " + _("This help message") + "\n" +
-        "  -conf=<file>           " + _("Specify configuration file (default: freicoin.conf)") + "\n" +
-        "  -pid=<file>            " + _("Specify pid file (default: freicoind.pid)") + "\n" +
+        "  -conf=<file>           " + _("Specify configuration file (default: ceuro.conf)") + "\n" +
+        "  -pid=<file>            " + _("Specify pid file (default: ceurod.pid)") + "\n" +
         "  -gen                   " + _("Generate coins") + "\n" +
         "  -gen=0                 " + _("Don't generate coins") + "\n" +
         "  -datadir=<dir>         " + _("Specify data directory") + "\n" +
@@ -298,7 +298,7 @@ std::string HelpMessage()
     return strUsage;
 }
 
-/** Initialize freicoin.
+/** Initialize ceuro.
  *  @pre Parameters should be parsed and config file should be read.
  */
 bool AppInit2()
@@ -442,13 +442,13 @@ bool AppInit2()
 
     std::string strDataDir = GetDataDir().string();
 
-    // Make sure only a single Freicoin process is using the data directory.
+    // Make sure only a single CEuro process is using the data directory.
     boost::filesystem::path pathLockFile = GetDataDir() / ".lock";
     FILE* file = fopen(pathLockFile.string().c_str(), "a"); // empty lock file; created if it doesn't exist.
     if (file) fclose(file);
     static boost::interprocess::file_lock lock(pathLockFile.string().c_str());
     if (!lock.try_lock())
-        return InitError(strprintf(_("Cannot obtain a lock on data directory %s.  Freicoin is probably already running."), strDataDir.c_str()));
+        return InitError(strprintf(_("Cannot obtain a lock on data directory %s.  CEuro is probably already running."), strDataDir.c_str()));
 
 #if !defined(WIN32) && !defined(QT_GUI)
     if (fDaemon)
@@ -475,7 +475,7 @@ bool AppInit2()
     if (GetBoolArg("-shrinkdebugfile", !fDebug))
         ShrinkDebugFile();
     printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-    printf("Freicoin version %s (%s)\n", FormatFullVersion().c_str(), CLIENT_DATE.c_str());
+    printf("CEuro version %s (%s)\n", FormatFullVersion().c_str(), CLIENT_DATE.c_str());
     printf("Using OpenSSL version %s\n", SSLeay_version(SSLEAY_VERSION));
     if (!fLogTimestamps)
         printf("Startup time: %s\n", DateTimeStrFormat("%x %H:%M:%S", GetTime()).c_str());
@@ -484,7 +484,7 @@ bool AppInit2()
     std::ostringstream strErrors;
 
     if (fDaemon)
-        fprintf(stdout, "Freicoin server starting\n");
+        fprintf(stdout, "CEuro server starting\n");
 
     int64 nStart;
 
@@ -516,7 +516,7 @@ bool AppInit2()
                                      " Original wallet.dat saved as wallet.{timestamp}.bak in %s; if"
                                      " your balance or transactions are incorrect you should"
                                      " restore from a backup."), strDataDir.c_str());
-            uiInterface.ThreadSafeMessageBox(msg, _("Freicoin"), CClientUIInterface::OK | CClientUIInterface::ICON_EXCLAMATION | CClientUIInterface::MODAL);
+            uiInterface.ThreadSafeMessageBox(msg, _("CEuro"), CClientUIInterface::OK | CClientUIInterface::ICON_EXCLAMATION | CClientUIInterface::MODAL);
         }
         if (r == CDBEnv::RECOVER_FAIL)
             return InitError(_("wallet.dat corrupt, salvage failed"));
@@ -653,7 +653,7 @@ bool AppInit2()
         return InitError(_("Error loading blkindex.dat"));
 
     // as LoadBlockIndex can take several minutes, it's possible the user
-    // requested to kill freicoin-qt during the last operation. If so, exit.
+    // requested to kill ceuro-qt during the last operation. If so, exit.
     // As the program has not fully started yet, Shutdown() is possibly overkill.
     if (fRequestShutdown)
     {
@@ -707,13 +707,13 @@ bool AppInit2()
         {
             string msg(_("Warning: error reading wallet.dat! All keys read correctly, but transaction data"
                          " or address book entries might be missing or incorrect."));
-            uiInterface.ThreadSafeMessageBox(msg, _("Freicoin"), CClientUIInterface::OK | CClientUIInterface::ICON_EXCLAMATION | CClientUIInterface::MODAL);
+            uiInterface.ThreadSafeMessageBox(msg, _("CEuro"), CClientUIInterface::OK | CClientUIInterface::ICON_EXCLAMATION | CClientUIInterface::MODAL);
         }
         else if (nLoadWalletRet == DB_TOO_NEW)
-            strErrors << _("Error loading wallet.dat: Wallet requires newer version of Freicoin") << "\n";
+            strErrors << _("Error loading wallet.dat: Wallet requires newer version of CEuro") << "\n";
         else if (nLoadWalletRet == DB_NEED_REWRITE)
         {
-            strErrors << _("Wallet needed to be rewritten: restart Freicoin to complete") << "\n";
+            strErrors << _("Wallet needed to be rewritten: restart CEuro to complete") << "\n";
             printf("%s", strErrors.str().c_str());
             return InitError(strErrors.str());
         }

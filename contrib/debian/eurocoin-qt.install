@@ -1,0 +1,5 @@
+eurocoin-qt usr/bin
+share/pixmaps/eurocoin32.xpm usr/share/pixmaps
+share/pixmaps/eurocoin80.xpm usr/share/pixmaps
+debian/eurocoin-qt.desktop usr/share/applications
+debian/eurocoin-qt.protocol usr/share/kde4/services/

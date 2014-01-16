@@ -1,5 +1,5 @@
 # === Makefile ------------------------------------------------------------===
-# Copyright © 2011-2012 Freicoin Developers.
+# Copyright © 2011-2012 Eurocoin Developers.
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -307,7 +307,7 @@ VAGRANT_DESTROY = \
 # ===----------------------------------------------------------------------===
 
 .PHONY: all
-all: freicoind Freicoin-Qt
+all: eurocoind Eurocoin-Qt
 
 .PHONY: mostlyclean
 mostlyclean:
@@ -555,13 +555,13 @@ GUEST_PATCH_DIR    := /vagrant/$(PATCH_DIR)
 
 TARGETS            :=
 
-Freicoin-Qt: Freicoin-Qt-i686-pc-linux-gnu \
-             Freicoin-Qt-x86_64-pc-linux-gnu \
-             Freicoin-Qt-i686-static-mingw32
+Eurocoin-Qt: Eurocoin-Qt-i686-pc-linux-gnu \
+             Eurocoin-Qt-x86_64-pc-linux-gnu \
+             Eurocoin-Qt-i686-static-mingw32
 
 ARCH               := i686-pc-linux-gnu
-TARGET             := Freicoin-Qt-$(ARCH)
-$(TARGET)_NAME     := Freicoin-Qt
+TARGET             := Eurocoin-Qt-$(ARCH)
+$(TARGET)_NAME     := Eurocoin-Qt
 $(TARGET)_VERSION  := $(VERSION)
 $(TARGET)_OUTPUT   := $(TARGET)-$($(TARGET)_VERSION)-gitian.zip
 $(TARGET)_SCRIPT   := contrib/gitian-descriptors/$($(TARGET)_NAME)/$(ARCH).yml
@@ -589,8 +589,8 @@ $(TARGET)_MANIFEST := $(call BUILD_MANIFEST,$($(TARGET)_FILES))
 TARGETS            += $(TARGET)
 
 ARCH               := x86_64-pc-linux-gnu
-TARGET             := Freicoin-Qt-$(ARCH)
-$(TARGET)_NAME     := Freicoin-Qt
+TARGET             := Eurocoin-Qt-$(ARCH)
+$(TARGET)_NAME     := Eurocoin-Qt
 $(TARGET)_VERSION  := $(VERSION)
 $(TARGET)_OUTPUT   := $(TARGET)-$($(TARGET)_VERSION)-gitian.zip
 $(TARGET)_SCRIPT   := contrib/gitian-descriptors/$($(TARGET)_NAME)/$(ARCH).yml
@@ -618,8 +618,8 @@ $(TARGET)_MANIFEST := $(call BUILD_MANIFEST,$($(TARGET)_FILES))
 TARGETS            += $(TARGET)
 
 ARCH               := i686-apple-darwin10
-TARGET             := Freicoin-Qt-$(ARCH)
-$(TARGET)_NAME     := Freicoin-Qt
+TARGET             := Eurocoin-Qt-$(ARCH)
+$(TARGET)_NAME     := Eurocoin-Qt
 $(TARGET)_VERSION  := $(VERSION)
 $(TARGET)_OUTPUT   := $(TARGET)-$($(TARGET)_VERSION)-gitian.zip
 $(TARGET)_SCRIPT   := contrib/gitian-descriptors/$($(TARGET)_NAME)/$(ARCH).yml
@@ -644,8 +644,8 @@ $(TARGET)_MANIFEST := $(call BUILD_MANIFEST,$($(TARGET)_FILES))
 TARGETS            += $(TARGET)
 
 ARCH               := x86_64-apple-darwin10
-TARGET             := Freicoin-Qt-$(ARCH)
-$(TARGET)_NAME     := Freicoin-Qt
+TARGET             := Eurocoin-Qt-$(ARCH)
+$(TARGET)_NAME     := Eurocoin-Qt
 $(TARGET)_VERSION  := $(VERSION)
 $(TARGET)_OUTPUT   := $(TARGET)-$($(TARGET)_VERSION)-gitian.zip
 $(TARGET)_SCRIPT   := contrib/gitian-descriptors/$($(TARGET)_NAME)/$(ARCH).yml
@@ -670,8 +670,8 @@ $(TARGET)_MANIFEST := $(call BUILD_MANIFEST,$($(TARGET)_FILES))
 TARGETS            += $(TARGET)
 
 ARCH               := i686-static-mingw32
-TARGET             := Freicoin-Qt-$(ARCH)
-$(TARGET)_NAME     := Freicoin-Qt
+TARGET             := Eurocoin-Qt-$(ARCH)
+$(TARGET)_NAME     := Eurocoin-Qt
 $(TARGET)_VERSION  := $(VERSION)
 $(TARGET)_OUTPUT   := $(TARGET)-$($(TARGET)_VERSION)-gitian.zip
 $(TARGET)_SCRIPT   := contrib/gitian-descriptors/$($(TARGET)_NAME)/$(ARCH).yml
@@ -697,8 +697,8 @@ $(TARGET)_MANIFEST := $(call BUILD_MANIFEST,$($(TARGET)_FILES))
 TARGETS            += $(TARGET)
 
 ARCH               := x86_64-static-mingw32
-TARGET             := Freicoin-Qt-$(ARCH)
-$(TARGET)_NAME     := Freicoin-Qt
+TARGET             := Eurocoin-Qt-$(ARCH)
+$(TARGET)_NAME     := Eurocoin-Qt
 $(TARGET)_VERSION  := $(VERSION)
 $(TARGET)_OUTPUT   := $(TARGET)-$($(TARGET)_VERSION)-gitian.zip
 $(TARGET)_SCRIPT   := contrib/gitian-descriptors/$($(TARGET)_NAME)/$(ARCH).yml
@@ -1135,13 +1135,13 @@ $(TARGET)_FILES    := $(sort $($(TARGET)_FILES))
 $(TARGET)_MANIFEST := $(call BUILD_MANIFEST,$($(TARGET)_FILES))
 TARGETS            += $(TARGET)
 
-freicoind: freicoind-i686-pc-linux-gnu \
-           freicoind-x86_64-pc-linux-gnu \
-           freicoind-i686-static-mingw32
+eurocoind: eurocoind-i686-pc-linux-gnu \
+           eurocoind-x86_64-pc-linux-gnu \
+           eurocoind-i686-static-mingw32
 
 ARCH               := i686-pc-linux-gnu
-TARGET             := freicoind-$(ARCH)
-$(TARGET)_NAME     := freicoind
+TARGET             := eurocoind-$(ARCH)
+$(TARGET)_NAME     := eurocoind
 $(TARGET)_VERSION  := $(VERSION)
 $(TARGET)_OUTPUT   := $(TARGET)-$($(TARGET)_VERSION)-gitian.zip
 $(TARGET)_SCRIPT   := contrib/gitian-descriptors/$($(TARGET)_NAME)/$(ARCH).yml
@@ -1166,8 +1166,8 @@ $(TARGET)_MANIFEST := $(call BUILD_MANIFEST,$($(TARGET)_FILES))
 TARGETS            += $(TARGET)
 
 ARCH               := x86_64-pc-linux-gnu
-TARGET             := freicoind-$(ARCH)
-$(TARGET)_NAME     := freicoind
+TARGET             := eurocoind-$(ARCH)
+$(TARGET)_NAME     := eurocoind
 $(TARGET)_VERSION  := $(VERSION)
 $(TARGET)_OUTPUT   := $(TARGET)-$($(TARGET)_VERSION)-gitian.zip
 $(TARGET)_SCRIPT   := contrib/gitian-descriptors/$($(TARGET)_NAME)/$(ARCH).yml
@@ -1192,8 +1192,8 @@ $(TARGET)_MANIFEST := $(call BUILD_MANIFEST,$($(TARGET)_FILES))
 TARGETS            += $(TARGET)
 
 ARCH               := i686-apple-darwin10
-TARGET             := freicoind-$(ARCH)
-$(TARGET)_NAME     := freicoind
+TARGET             := eurocoind-$(ARCH)
+$(TARGET)_NAME     := eurocoind
 $(TARGET)_VERSION  := $(VERSION)
 $(TARGET)_OUTPUT   := $(TARGET)-$($(TARGET)_VERSION)-gitian.zip
 $(TARGET)_SCRIPT   := contrib/gitian-descriptors/$($(TARGET)_NAME)/$(ARCH).yml
@@ -1218,8 +1218,8 @@ $(TARGET)_MANIFEST := $(call BUILD_MANIFEST,$($(TARGET)_FILES))
 TARGETS            += $(TARGET)
 
 ARCH               := x86_64-apple-darwin10
-TARGET             := freicoind-$(ARCH)
-$(TARGET)_NAME     := freicoind
+TARGET             := eurocoind-$(ARCH)
+$(TARGET)_NAME     := eurocoind
 $(TARGET)_VERSION  := $(VERSION)
 $(TARGET)_OUTPUT   := $(TARGET)-$($(TARGET)_VERSION)-gitian.zip
 $(TARGET)_SCRIPT   := contrib/gitian-descriptors/$($(TARGET)_NAME)/$(ARCH).yml
@@ -1244,8 +1244,8 @@ $(TARGET)_MANIFEST := $(call BUILD_MANIFEST,$($(TARGET)_FILES))
 TARGETS            += $(TARGET)
 
 ARCH               := i686-static-mingw32
-TARGET             := freicoind-$(ARCH)
-$(TARGET)_NAME     := freicoind
+TARGET             := eurocoind-$(ARCH)
+$(TARGET)_NAME     := eurocoind
 $(TARGET)_VERSION  := $(VERSION)
 $(TARGET)_OUTPUT   := $(TARGET)-$($(TARGET)_VERSION)-gitian.zip
 $(TARGET)_SCRIPT   := contrib/gitian-descriptors/$($(TARGET)_NAME)/$(ARCH).yml
@@ -1270,8 +1270,8 @@ $(TARGET)_MANIFEST := $(call BUILD_MANIFEST,$($(TARGET)_FILES))
 TARGETS            += $(TARGET)
 
 ARCH               := x86_64-static-mingw32
-TARGET             := freicoind-$(ARCH)
-$(TARGET)_NAME     := freicoind
+TARGET             := eurocoind-$(ARCH)
+$(TARGET)_NAME     := eurocoind
 $(TARGET)_VERSION  := $(VERSION)
 $(TARGET)_OUTPUT   := $(TARGET)-$($(TARGET)_VERSION)-gitian.zip
 $(TARGET)_SCRIPT   := contrib/gitian-descriptors/$($(TARGET)_NAME)/$(ARCH).yml
@@ -2002,13 +2002,13 @@ ARCH               := linux-tar-xz
 TARGET             := release-$(ARCH)
 $(TARGET)_NAME     := release
 $(TARGET)_VERSION  := $(VERSION)
-$(TARGET)_OUTPUT   := freicoin-$($(TARGET)_VERSION)-linux.tar.xz
+$(TARGET)_OUTPUT   := eurocoin-$($(TARGET)_VERSION)-linux.tar.xz
 $(TARGET)_SCRIPT   := contrib/gitian-descriptors/$($(TARGET)_NAME)/$(ARCH).yml
 $(TARGET)_PKGS     :=
-$(TARGET)_DEPS     := freicoind-i686-pc-linux-gnu \
-                      freicoind-x86_64-pc-linux-gnu \
-                      Freicoin-Qt-i686-pc-linux-gnu \
-                      Freicoin-Qt-x86_64-pc-linux-gnu
+$(TARGET)_DEPS     := eurocoind-i686-pc-linux-gnu \
+                      eurocoind-x86_64-pc-linux-gnu \
+                      Eurocoin-Qt-i686-pc-linux-gnu \
+                      Eurocoin-Qt-x86_64-pc-linux-gnu
 $(TARGET)_FILES    := $($(TARGET)_SCRIPT) \
                       contrib/vagrant/cache/src-local.tar.xz
 $(TARGET)_FILES    += $(foreach PACKAGE, \
@@ -2022,11 +2022,11 @@ ARCH               := windows-setup
 TARGET             := release-$(ARCH)
 $(TARGET)_NAME     := release
 $(TARGET)_VERSION  := $(VERSION)
-$(TARGET)_OUTPUT   := freicoin-$($(TARGET)_VERSION)-windows-setup.exe
+$(TARGET)_OUTPUT   := eurocoin-$($(TARGET)_VERSION)-windows-setup.exe
 $(TARGET)_SCRIPT   := contrib/gitian-descriptors/$($(TARGET)_NAME)/$(ARCH).yml
 $(TARGET)_PKGS     :=
-$(TARGET)_DEPS     := freicoind-i686-static-mingw32 \
-                      Freicoin-Qt-i686-static-mingw32
+$(TARGET)_DEPS     := eurocoind-i686-static-mingw32 \
+                      Eurocoin-Qt-i686-static-mingw32
 $(TARGET)_FILES    := $($(TARGET)_SCRIPT) \
                       contrib/vagrant/cache/src-local.tar.xz \
                       share/setup.nsi
@@ -2041,11 +2041,11 @@ ARCH               := windows-zip
 TARGET             := release-$(ARCH)
 $(TARGET)_NAME     := release
 $(TARGET)_VERSION  := $(VERSION)
-$(TARGET)_OUTPUT   := freicoin-$($(TARGET)_VERSION)-windows.zip
+$(TARGET)_OUTPUT   := eurocoin-$($(TARGET)_VERSION)-windows.zip
 $(TARGET)_SCRIPT   := contrib/gitian-descriptors/$($(TARGET)_NAME)/$(ARCH).yml
 $(TARGET)_PKGS     :=
-$(TARGET)_DEPS     := freicoind-i686-static-mingw32 \
-                      Freicoin-Qt-i686-static-mingw32
+$(TARGET)_DEPS     := eurocoind-i686-static-mingw32 \
+                      Eurocoin-Qt-i686-static-mingw32
 $(TARGET)_FILES    := $($(TARGET)_SCRIPT) \
                       contrib/vagrant/cache/src-local.tar.xz
 $(TARGET)_FILES    += $(foreach PACKAGE, \
@@ -2340,13 +2340,13 @@ $(HOST_OUTPUT_DIR)/$($(1)_OUTPUT): \
 	
 	$(call VAGRANT_UP)
 	
-	$(call DEPLOY_SOURCE_BUNDLE,freicoin)
+	$(call DEPLOY_SOURCE_BUNDLE,eurocoin)
 	
 	echo `$($(1)_MANIFEST)` > .$(1).manifest
 	
 	if [ ! -f $(HOST_CACHE_DIR)/$(1)/`cat .$(1).manifest`/$($(1)_OUTPUT) ]; then \
 	    vagrant ssh --command "cd ~/gitian-builder && \
-	        USE_LXC=1 ./bin/gbuild ../freicoin/$($(1)_SCRIPT)" || exit 1; \
+	        USE_LXC=1 ./bin/gbuild ../eurocoin/$($(1)_SCRIPT)" || exit 1; \
 	    vagrant ssh --command "cd ~/gitian-builder/build/out && \
 	        if [ ! -f $($(1)_OUTPUT) ]; then \
 	            zip -r $($(1)_OUTPUT) * || exit 1; \
@@ -2379,7 +2379,7 @@ $(HOST_OUTPUT_DIR)/$($(1)_OUTPUT): \
 	
 	rm -f .$(1).manifest
 	
-	vagrant ssh --command "rm -rf ~/freicoin"
+	vagrant ssh --command "rm -rf ~/eurocoin"
 	
 ifdef VAGRANT_CYCLE
 	-$(call VAGRANT_HALT)

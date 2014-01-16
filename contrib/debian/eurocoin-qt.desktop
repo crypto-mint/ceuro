@@ -1,0 +1,12 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Eurocoin
+Comment=Eurocoin P2P Cryptocurrency
+Comment[fr]=Eurocoin, monnaie virtuelle cryptographique pair à pair
+Comment[tr]=Eurocoin, eşten eşe kriptografik sanal para birimi
+Exec=/usr/bin/eurocoin-qt
+Terminal=false
+Type=Application
+Icon=/usr/share/pixmaps/eurocoin80.xpm
+MimeType=x-scheme-handler/eurocoin;
+Categories=Office;

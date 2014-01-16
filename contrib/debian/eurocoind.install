@@ -1,0 +1,2 @@
+debian/bin/eurocoind usr/bin
+src/eurocoind usr/lib/eurocoin

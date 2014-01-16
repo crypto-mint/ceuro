@@ -195,7 +195,7 @@ ReadKeyValue(CWallet* pwallet, CDataStream& ssKey, CDataStream& ssValue,
         {
             string strAddress;
             ssKey >> strAddress;
-            ssValue >> pwallet->mapAddressBook[CFreicoinAddress(strAddress).Get()];
+            ssValue >> pwallet->mapAddressBook[CCEuroAddress(strAddress).Get()];
         }
         else if (strType == "tx")
         {
@@ -484,7 +484,7 @@ DBErrors CWalletDB::LoadWallet(CWallet* pwallet)
 void ThreadFlushWalletDB(void* parg)
 {
     // Make this thread recognisable as the wallet flushing thread
-    RenameThread("freicoin-wallet");
+    RenameThread("ceuro-wallet");
 
     const string& strFile = ((const string*)parg)[0];
     static bool fOneThread;

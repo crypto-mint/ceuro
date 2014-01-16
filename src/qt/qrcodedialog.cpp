@@ -1,7 +1,7 @@
 #include "qrcodedialog.h"
 #include "ui_qrcodedialog.h"
 
-#include "freicoinunits.h"
+#include "ceurounits.h"
 #include "guiconstants.h"
 #include "guiutil.h"
 #include "optionsmodel.h"
@@ -83,7 +83,7 @@ void QRCodeDialog::genCode()
 
 QString QRCodeDialog::getURI()
 {
-    QString ret = QString("freicoin:%1").arg(address);
+    QString ret = QString("ceuro:%1").arg(address);
     int paramCount = 0;
 
     ui->outUri->clear();
@@ -93,7 +93,7 @@ QString QRCodeDialog::getURI()
         if (ui->lnReqAmount->validate())
         {
             // even if we allow a non FRC unit input in lnReqAmount, we generate the URI with FRC as unit (as defined in BIP21)
-            ret += QString("?amount=%1").arg(FreicoinUnits::format(FreicoinUnits::FRC, ui->lnReqAmount->valueAsMpq()));
+            ret += QString("?amount=%1").arg(CEuroUnits::format(CEuroUnits::FRC, ui->lnReqAmount->valueAsMpq()));
             paramCount++;
         }
         else
